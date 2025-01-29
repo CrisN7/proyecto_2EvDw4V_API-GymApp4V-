@@ -6,7 +6,6 @@ use App\Service\MonitorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-
 use Symfony\Component\Routing\Attribute\Route;
 use App\Model\MonitorNewDTO;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
@@ -36,7 +35,7 @@ final class MonitorController extends AbstractController
     }
 
 
-    //TODO no se si es obligatorio pasarle un body como lo especifica en el swagger. Tenemos que hacer que los erroes que devuelva sean como los de los ejemplos?? ej:{"code": 21,"description": "The name is mandatory"}
+    //TODO no se si es obligatorio pasarle un body como lo especifica en el swagger. Tenemos que hacer que los errores que devuelva sean como los de los ejemplos?? ej:{"code": 21,"description": "The name is mandatory"}
     #[Route('/monitors/{monitorId}', name: 'edit_monitor', methods: ["PUT"])]
     public function editMonitor(int $monitorId): JsonResponse
     {
@@ -54,7 +53,7 @@ final class MonitorController extends AbstractController
     {
         if ($this->monitorService->existMonitorById($monitorId)){ 
             $this->monitorService->deleteMonitorById($monitorId);
-            return $this->json(["Monitor eliminado con exito"], 200);
+            return $this->json(["Monitor eliminado con éxito"], 200);
         }
         else{
             return $this->json(["error" => "Monitor not found."], 404);

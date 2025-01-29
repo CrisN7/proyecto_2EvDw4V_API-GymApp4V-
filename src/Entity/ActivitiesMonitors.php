@@ -21,6 +21,9 @@ class ActivitiesMonitors
     #[ORM\JoinColumn(nullable: false)]
     private ?Monitor $monitor_id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'activityMonitors')]
+    private ?Activities $activities = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -49,4 +52,17 @@ class ActivitiesMonitors
 
         return $this;
     }
+
+    public function getActivities(): ?Activities
+    {
+        return $this->activities;
+    }
+
+    public function setActivities(?Activities $activities): static
+    {
+        $this->activities = $activities;
+
+        return $this;
+    }
+
 }

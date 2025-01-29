@@ -18,6 +18,7 @@ class ActivityTypeService
 
     public function __construct(private EntityManagerInterface $entityManager)
     {
+        //Cargo unos datos al instanciar este servicio, para que la petición GET de activity-type tenga datos que devolver
         $this->activityType1 = new ActivityTypeNewDTO(1, "Pilates", 1);
         $this->activityType2 = new ActivityTypeNewDTO(2, "Spinning", 1);
         $this->activityType3 = new ActivityTypeNewDTO(3, "BodyPump", 2);
@@ -33,7 +34,7 @@ class ActivityTypeService
         $this->entityManager->persist($this->DTOtoEntity($this->activityType4));
         $this->entityManager->persist($this->DTOtoEntity($this->activityType5));
 
-        //Con flush(), Doctrine ejecuta las consultas necesarias para sincronizar la base de datos con los cambios realizados. Aquí: Se inserta el nuevo restaurante en la base de datos. Se generan y ejecutan las consultas SQL necesarias.
+        //Con flush(), Doctrine ejecuta las consultas necesarias para sincronizar la base de datos con los cambios realizados. Se generan y ejecutan las consultas SQL necesarias.
         $this->entityManager->flush();
 
 
@@ -41,15 +42,15 @@ class ActivityTypeService
 
     public function emptyActivityTypeTable(): void
     {
-        // Recuperar todos los registros de la tabla ActivityType
+        //Recuperamos todos los registros de la tabla ActivityType
         $activityTypes = $this->entityManager->getRepository(ActivityType::class)->findAll();
 
-        // Eliminar cada registro
+        //Eliminamos cada registro
         foreach ($activityTypes as $activityType) {
             $this->entityManager->remove($activityType);
         }
 
-        // Aplicar los cambios a la base de datos
+        //Aplicamos los cambios a la base de datos
         $this->entityManager->flush();
     }
 
